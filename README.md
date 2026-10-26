@@ -1,8 +1,8 @@
-# Diamond â€” MLB Decision Lab
+# Diamond — MLB Decision Lab
 
 A full-stack baseball research platform connecting player production, contract costs, historical expectations and the evidence behind each comparison.
 
-**[Explore the portfolio demo](https://diamond-mlb-decision-lab.mellowtang37.chatgpt.site)** Â· [Architecture](docs/ARCHITECTURE.md) Â· [Methods and limitations](docs/METHODOLOGY.md) Â· [Measured results](reports/performance.json) Â· [Deployment](docs/DEPLOYMENT.md)
+**[Explore the portfolio demo](https://diamond-mlb-decision-lab.mellowtang37.chatgpt.site)** · [Architecture](docs/ARCHITECTURE.md) · [Methods and limitations](docs/METHODOLOGY.md) · [Measured results](reports/performance.json) · [Deployment](docs/DEPLOYMENT.md)
 
 The public demonstration is a frozen Atlanta contract-research snapshot. The full local application includes all teams, players, game logs, leaderboards, year-over-year changes, comparisons, favorites and ingestion controls. The snapshot demo does not run the Python backend or fetch live data.
 
@@ -20,7 +20,7 @@ A statistics table can show who performed. Diamond helps investigate what change
 
 ## Stack
 
-React 19 Â· TypeScript Â· Vite Â· FastAPI Â· SQLAlchemy Â· SQLite locally Â· PostgreSQL support Â· pytest Â· Playwright Â· GitHub Actions
+React 19 · TypeScript · Vite · FastAPI · SQLAlchemy · SQLite locally · PostgreSQL support · pytest · Playwright · GitHub Actions
 
 ## Run the complete app
 

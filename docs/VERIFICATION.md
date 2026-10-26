@@ -1,4 +1,4 @@
-# Verification â€” October 26, 2026
+# Verification — October 26, 2026
 
 ## Executed locally
 
@@ -20,4 +20,4 @@
 
 https://diamond-mlb-decision-lab.mellowtang37.chatgpt.site
 
-Published with Sites. Frozen Atlanta subset and 2022â€“2025 benchmark validation; no backend credentials, mutation endpoints or analytics. Source snapshots retain their individual dates. The complete local app remains separate.
+Published with Sites. Frozen Atlanta subset and 2022–2025 benchmark validation; no backend credentials, mutation endpoints or analytics. Source snapshots retain their individual dates. The complete local app remains separate.
