@@ -10,11 +10,11 @@
 - Performance: reports/performance.json records five sequential real local HTTP calls per endpoint and explicit measurement scope.
 - Ingestion regression coverage includes partial failure/retry, atomic correction reimport, transient/permanent request behavior and cross-team appearances.
 
-## Configured, not yet executed on hosting infrastructure
+## Executed on GitHub Actions
 
-- GitHub Actions: backend tests, frontend checks/build, Chromium install and Playwright desktop/mobile demo checks. No GitHub remote has been selected, so no successful remote CI run is claimed.
-- Eight Playwright cases (four journeys Ã— desktop/mobile) load successfully under the test runner. They have not been run by the standalone Playwright runner in this environment; equivalent successful interactions above were checked through the browser connection. The simulated-503 case remains for CI.
-- Dockerfile: non-root image, same-origin built UI, read-only public API default, disabled automatic worker and health check. Docker is unavailable locally; image build remains unverified.
+- [Backend and frontend verification passed](https://github.com/danetreur-max/diamond-mlb-analytics/actions/runs/40402876564): Python tests, frontend regression calculations, production build and Playwright desktop/mobile demo journeys.
+- [Production container verification](https://github.com/danetreur-max/diamond-mlb-analytics/actions/runs/40403098271): the container job successfully built the Docker image, started it, checked the built UI and API health, confirmed read-only mode, and verified import requests return HTTP 403. The backend job also passed on this code commit.
+- Local Docker remains unavailable; the container was verified on GitHub's Linux runner.
 
 ## Public demonstration
 
