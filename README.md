@@ -8,6 +8,8 @@ The public demonstration is a frozen Atlanta contract-research snapshot. The ful
 
 ![Portfolio demonstration](docs/demo-desktop.png)
 
+[![Verify Diamond](https://github.com/danetreur-max/diamond-mlb-analytics/actions/workflows/ci.yml/badge.svg)](https://github.com/danetreur-max/diamond-mlb-analytics/actions/workflows/ci.yml)
+
 ## Why this project
 
 A statistics table can show who performed. Diamond helps investigate what changed, how production relates to reported costs, whether a comparison is fair, and which source gaps prevent a confident conclusion. Salary efficiency, historical performance expectations and published projections remain separate measures.

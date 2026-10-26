@@ -43,3 +43,39 @@ jobs:
         with:
           name: browser-test-results
           path: frontend/test-results
+
+  container:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build production image
+        run: docker build -t diamond-demo .
+      - name: Start isolated read-only demo
+        run: docker run -d --name diamond-ci -p 127.0.0.1:8000:8000 diamond-demo
+      - name: Verify UI, API and mutation protection
+        run: |
+          python - <<'PY'
+          import json,time,urllib.request,urllib.error
+          for attempt in range(30):
+              try:
+                  with urllib.request.urlopen('http://127.0.0.1:8000/api/health',timeout=2) as r:
+                      assert json.load(r)['status']=='ok'
+                  break
+              except (OSError,AssertionError):time.sleep(1)
+          else:raise RuntimeError('Container failed to become healthy')
+          with urllib.request.urlopen('http://127.0.0.1:8000/') as r:
+              assert 'text/html' in r.headers['Content-Type']
+              assert b'assets/' in r.read()
+          with urllib.request.urlopen('http://127.0.0.1:8000/api/deployment') as r:
+              assert json.load(r)['read_only'] is True
+          request=urllib.request.Request('http://127.0.0.1:8000/api/imports',data=b'{}',headers={'Content-Type':'application/json'},method='POST')
+          try:urllib.request.urlopen(request)
+          except urllib.error.HTTPError as error:assert error.code==403
+          else:raise AssertionError('Public mutations must be rejected')
+          PY
+      - name: Container logs
+        if: always()
+        run: docker logs diamond-ci || true
+      - name: Stop isolated demo
+        if: always()
+        run: docker rm -f diamond-ci || true
