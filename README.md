@@ -68,7 +68,7 @@ pnpm exec playwright install chromium
 pnpm test:e2e
 ```
 
-GitHub Actions runs backend tests, frontend calculation checks, the production build and desktop/mobile snapshot-demo journeys. The initial backend/frontend verification passed on GitHub Actions, and the production-container job was verified on a hosted Linux runner. Check the badge for the current run. Local verification and measurements are recorded in [verification](docs/VERIFICATION.md).
+GitHub Actions runs backend tests, frontend calculation checks, the production build and desktop/mobile snapshot-demo journeys. Backend, frontend/browser and production-container jobs passed in the [complete hosted verification run](https://github.com/danetreur-max/diamond-mlb-analytics/actions/runs/40404046129). Check the badge for the current run. Local verification and measurements are recorded in [verification](docs/VERIFICATION.md).
 
 ## Measured scale
 

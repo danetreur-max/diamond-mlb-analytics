@@ -12,9 +12,14 @@
 
 ## Executed on GitHub Actions
 
-- [Backend and frontend verification passed](https://github.com/danetreur-max/diamond-mlb-analytics/actions/runs/40402876564): Python tests, frontend regression calculations, production build and Playwright desktop/mobile demo journeys.
-- [Production container verification](https://github.com/danetreur-max/diamond-mlb-analytics/actions/runs/40403098271): the container job successfully built the Docker image, started it, checked the built UI and API health, confirmed read-only mode, and verified import requests return HTTP 403. The backend job also passed on this code commit.
-- Local Docker remains unavailable; the container was verified on GitHub's Linux runner.
+[Complete successful verification run](https://github.com/danetreur-max/diamond-mlb-analytics/actions/runs/40404046129) on October 26, 2026:
+
+- Backend: all 78 tests passed.
+- Frontend: calculation/regression checks, TypeScript and production build passed.
+- Browser journeys: the desktop and mobile Playwright projects passed, covering roster search, source evidence, saved-review persistence/removal, unavailable-source handling and viewport overflow.
+- Production container: image build, startup, built frontend, API health, read-only configuration and HTTP 403 mutation rejection passed.
+- Browser tests use the official version-matched Playwright image, avoiding per-run system package downloads. Job timeouts bound stalled infrastructure.
+- Docker remains unavailable locally; the production container was verified on GitHub's Linux runner.
 
 ## Public demonstration
 
