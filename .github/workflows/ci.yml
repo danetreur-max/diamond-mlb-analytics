@@ -5,6 +5,7 @@ permissions:
 jobs:
   backend:
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -17,6 +18,10 @@ jobs:
           MLB_START_WORKER: '0'
   frontend:
     runs-on: ubuntu-latest
+    timeout-minutes: 15
+    container:
+      image: mcr.microsoft.com/playwright:v1.64.1-noble
+      options: --shm-size=1gb
     steps:
       - uses: actions/checkout@v4
       - uses: pnpm/action-setup@v4
@@ -34,8 +39,6 @@ jobs:
         working-directory: frontend
       - run: pnpm test && pnpm build
         working-directory: frontend
-      - run: pnpm exec playwright install --with-deps chromium
-        working-directory: frontend
       - run: pnpm test:e2e
         working-directory: frontend
       - uses: actions/upload-artifact@v4
@@ -46,6 +49,7 @@ jobs:
 
   container:
     runs-on: ubuntu-latest
+    timeout-minutes: 15
     steps:
       - uses: actions/checkout@v4
       - name: Build production image
