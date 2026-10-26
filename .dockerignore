@@ -1,0 +1,11 @@
+**/.venv
+**/node_modules
+**/.git
+**/*.db*
+**/*.log
+**/__pycache__
+**/.env*
+backend/financial-source-cache
+backend/financial-source-war-*.csv
+frontend/dist
+logs

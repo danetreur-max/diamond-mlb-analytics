@@ -1,0 +1,13 @@
+const fs=require('node:fs'),vm=require('node:vm'),ts=require('typescript'),assert=require('node:assert/strict');
+const code=ts.transpileModule(fs.readFileSync('src/PatternInsights.tsx','utf8'),{compilerOptions:{module:ts.ModuleKind.CommonJS,jsx:ts.JsxEmit.React,esModuleInterop:true}}).outputText;
+const exportsObject={};vm.runInNewContext(code,{exports:exportsObject,require:()=>({}),console});
+const {statcastPairs,savedRateChanges}=exportsObject;
+const rows=[{season:2025,role:'batter',dataset:'expected_statistics',stats:{est_woba:'.320'}},{season:2026,role:'batter',dataset:'expected_statistics',stats:{est_woba:'.300'}},{season:2026,role:'pitcher',dataset:'expected_statistics',stats:{est_woba:'.200'}}];
+const pair=statcastPairs(rows,2026,'batting').find(r=>r.metric==='est_woba');
+assert.equal(pair.before,.320);assert.equal(pair.after,.300);assert.ok(Math.abs(pair.delta+.020)<1e-9);
+assert.equal(statcastPairs(rows,2026,'pitching').find(r=>r.metric==='est_woba').delta,null);
+assert.equal(statcastPairs(rows,2026,'batting').find(r=>r.metric==='avg_hit_speed').before,null);
+assert.equal(savedRateChanges({batting:{ops:.8}},{batting:{ops:.81}}).length,0);
+assert.equal(savedRateChanges({batting:{ops:.8}},{batting:{ops:.84}})[0].metric,'ops');
+assert.equal(savedRateChanges({batting:{ops:null}},{batting:{ops:.84}}).length,0);
+console.log('Insight checks passed: paired seasons, role separation, missing data and saved-review thresholds.');

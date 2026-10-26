@@ -1,0 +1,17 @@
+const assert=require('node:assert/strict');
+const fs=require('node:fs');
+const vm=require('node:vm');
+const ts=require('typescript');
+const compiled=ts.transpileModule(fs.readFileSync('src/rolling.ts','utf8'),{compilerOptions:{module:ts.ModuleKind.CommonJS}}).outputText;
+const scope={exports:{}};
+vm.runInNewContext(compiled,scope);
+const {summed}=scope.exports;
+const batting=[{stats:{atBats:1,hits:1,homeRuns:1,plateAppearances:1}},{stats:{atBats:9,hits:0,plateAppearances:9}}];
+assert.equal(summed(batting,'batting','avg'),.1);
+assert.equal(summed(batting,'batting','ops'),.5);
+assert.equal(summed([{stats:{atBats:0,hits:0,baseOnBalls:1}}],'batting','avg'),null);
+assert.equal(summed([],'pitching','era'),null);
+const pitching=[{outs_recorded:17,stats:{earnedRuns:1,hits:2,baseOnBalls:1}}];
+assert.equal(summed(pitching,'pitching','era'),27/17);
+assert.equal(summed(pitching,'pitching','whip'),9/17);
+console.log('Rolling rates: weighted AVG/OPS, walks-only sample, empty innings and outs-based ERA/WHIP passed.');

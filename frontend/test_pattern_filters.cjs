@@ -1,0 +1,15 @@
+const fs=require('node:fs'),vm=require('node:vm'),ts=require('typescript'),assert=require('node:assert/strict');
+const code=ts.transpileModule(fs.readFileSync('src/patternFilters.ts','utf8'),{compilerOptions:{module:ts.ModuleKind.CommonJS}}).outputText;
+const ex={};vm.runInNewContext(code,{exports:ex});const {matchesPattern}=ex;
+const row={pattern:{kind:'mixed',evidence:[{metric:'iso',delta:.03},{metric:'era',delta:-.5}]},before_sample:400,after_sample:300};
+assert.equal(matchesPattern(row,'power','batting'),true);
+assert.equal(matchesPattern(row,'power','pitching'),false);
+assert.equal(matchesPattern(row,'mixed','batting'),true);
+assert.equal(matchesPattern(row,'workload','batting'),true);
+assert.equal(matchesPattern(row,'pitching','pitching'),true);
+assert.equal(matchesPattern({...row,after_sample:301},'workload','batting'),false);
+assert.equal(matchesPattern({before_sample:0,after_sample:100},'workload','batting'),false);
+assert.equal(matchesPattern({},'power','batting'),false);
+assert.equal(matchesPattern({},'all','batting'),true);
+assert.equal(matchesPattern({pattern:{evidence:[{metric:'whip',delta:-.1}]}},'pitching','pitching'),true);
+console.log('Pattern filter checks passed: overlapping categories, discipline, thresholds and missing values.');

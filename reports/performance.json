@@ -1,0 +1,42 @@
+{
+  "measured_at": "2026-10-26T20:32:20Z",
+  "environment": "Single local Windows instance, SQLite, existing data/cache, sequential HTTP loopback requests; not load testing. Cache may be warmed. No throughput or production latency claim.",
+  "summary": {
+    "teams": 57,
+    "players": 6780,
+    "games": 16740,
+    "player_game_batting": 374457,
+    "player_game_pitching": 148540,
+    "latest_season": 2026
+  },
+  "http_timings": [
+    {
+      "endpoint": "/api/health",
+      "samples": 5,
+      "median_ms": 17.04,
+      "maximum_ms": 18.02,
+      "minimum_ms": 4.28
+    },
+    {
+      "endpoint": "/api/summary",
+      "samples": 5,
+      "median_ms": 46.94,
+      "maximum_ms": 53.89,
+      "minimum_ms": 32.81
+    },
+    {
+      "endpoint": "/api/teams",
+      "samples": 5,
+      "median_ms": 18.77,
+      "maximum_ms": 33.67,
+      "minimum_ms": 6.89
+    },
+    {
+      "endpoint": "/api/contracts/teams/144?season=2026",
+      "samples": 5,
+      "median_ms": 245.51,
+      "maximum_ms": 279.7,
+      "minimum_ms": 203.02
+    }
+  ]
+}
